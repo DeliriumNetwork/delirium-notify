@@ -1,4 +1,5 @@
 <script lang="ts">
 </script>
 
-<main></main>
+<main class="flex items-center justify-center h-screen">
+</main>

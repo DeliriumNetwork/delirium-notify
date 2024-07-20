@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .notification {
+        @apply bg-opacity-90 backdrop-filter backdrop-blur-lg;
+    }
+    .state {
+        @apply mb-2 text-center text-gray-500;
+    }
+    .message {
+        @apply text-center text-gray-800;
+    }
+}
+
+/* Glowing effect */
+@layer utilities {
+    .glow {
+        @apply text-white;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    }
+}

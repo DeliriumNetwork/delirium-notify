@@ -1,0 +1,6 @@
+#IDE Related
+.idea/
+.vscode/
+
+#OS Related
+.DS_Store

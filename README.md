@@ -1,6 +1,6 @@
-# Delirium Template for FiveM
+# Delirium Notify System for FiveM
 
-Welcome to the Delirium Template for FiveM, a comprehensive starting point for developing FiveM servers using Lua. This template includes best practices, a clean directory structure, and essential files to kickstart your development.
+Welcome to Delirium Notify System for FiveM, a robust notification system designed to enhance your FiveM server by providing seamless, customizable notifications to players. This script is built following best practices for Lua development and includes a clean directory structure, making it easy to integrate and extend.
 
 ## Table of Contents
 
@@ -16,51 +16,48 @@ Welcome to the Delirium Template for FiveM, a comprehensive starting point for d
 ## Features
 
 - Organized directory structure for client, server, and shared scripts.
-- Best practices for Lua coding, including naming conventions, formatting, and usage of nativos.
-- Sample implementations for commands, events, functions, and NUI interaction.
-- Pre-configured with essential FiveM resources and dependencies.
+- Simple, modular design following best practices for Lua coding.
+- Easy integration with other scripts and resources.
+- Configurable notification duration and types.
+- NUI integration for clean, attractive notifications.
 
 ## Installation
 
 1. **Clone the repository:**
     ```sh
-    git clone --depth 1 https://github.com/DeliriumNetwork/delirium-template.git resource-name
+    git clone --depth 1 https://github.com/DeliriumNetwork/delirium-notify.git
     ```
 
 2. **Navigate to the project directory:**
     ```sh
-    cd delirium-template
+    cd delirium-notify
     ```
-
-3. **Install dependencies:**
-   Ensure you have the necessary dependencies installed for FiveM development.
-
-4. **Configure the `fxmanifest.lua` file:**
-   Adjust the `fxmanifest.lua` file to fit your project requirements.
-
-5. **Start your FiveM server:**
-   Follow the FiveM documentation to start your server with this template.
+   
+3. **Start your FiveM server:**
+   Follow the FiveM documentation to start your server with this notification system.
 
 ## Directory Structure
 
 The project is structured as follows:
 
 ```
-delirium-template
+delirium-notify
+├── .git
 ├── .github
-├── client
-│   ├── events.lua
-│   ├── functions.lua
-│   ├── main.lua
-│   └── nui.lua
-├── server
-│   ├── commands.lua
-│   ├── events.lua
-│   ├── functions.lua
-│   └── main.lua
-├── shared
-│   └── config.lua
+├── src
+│   ├── client
+│   │   ├── events.lua
+│   │   ├── functions.lua
+│   │   ├── main.lua
+│   │   └── nui.lua
+│   ├── server
+│   │   ├── events.lua
+│   │   ├── functions.lua
+│   │   └── main.lua
+│   └── shared
+│       └── config.lua
 ├── ui
+│   └── index.html
 ├── .gitignore
 ├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
@@ -76,29 +73,58 @@ delirium-template
 
 Configuration options are located in the `shared/config.lua` file. Adjust these settings to match your server requirements.
 
+```lua
+local Config = {}
+
+-- Notification configuration
+Config.notifyDuration = 5000  -- Duration for the notification in milliseconds
+
+return Config
+```
+
 ## Usage
 
 ### Client Scripts
 
-- **Main Script:** `client/main.lua`
-- **Events Script:** `client/events.lua`
-- **Functions Script:** `client/functions.lua`
-- **NUI Script:** `client/nui.lua`
+- **Main Script:** `src/client/main.lua`
+- **Events Script:** `src/client/events.lua`
+- **Functions Script:** `src/client/functions.lua`
+- **NUI Script:** `src/client/nui.lua`
 
 ### Server Scripts
 
-- **Main Script:** `server/main.lua`
-- **Events Script:** `server/events.lua`
-- **Functions Script:** `server/functions.lua`
-- **Commands Script:** `server/commands.lua`
+- **Main Script:** `src/server/main.lua`
+- **Events Script:** `src/server/events.lua`
+- **Functions Script:** `src/server/functions.lua`
 
 ### Shared Config
 
-- **Config Script:** `shared/config.lua`
+- **Config Script:** `src/shared/config.lua`
 
 ### NUI Integration
 
-The NUI integration is handled via the `client/nui.lua` script, providing an abstraction layer for interaction with the HTML/CSS/JS UI located in the `ui` folder.
+The NUI integration is handled via the `src/client/nui.lua` script, providing an abstraction layer for interaction with the HTML/CSS/JS UI located in the `ui` folder.
+
+### Examples of Integration
+
+To demonstrate how to use these functions in other scripts, here are some examples:
+
+#### Notify a Client from Another Script
+
+```lua
+local playerId = 1 -- ID of the player to notify
+local message = "You have withdrawn $1000 from your bank account."
+
+notify.notifyClient(playerId, message, 'success')
+```
+
+#### Notify All Clients from Another Script
+
+```lua
+local message = "Action performed: started the event."
+
+notify.notifyAllClients(message, 'info')
+```
 
 ## Contributing
 
@@ -110,4 +136,4 @@ This project is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE
 
 ## Acknowledgements
 
-This template is maintained by the Delirium Network and its contributors. We appreciate the community's support and contributions.
+This script is maintained by the Delirium Network and its contributors. We appreciate the community's support and contributions.
